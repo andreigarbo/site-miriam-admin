@@ -9,6 +9,7 @@
           <RouterLink class="header-router-link" to="/analytics">Analytics</RouterLink>
         </nav>
       </div>
+      <hr />
     </div>
   </header>
 
