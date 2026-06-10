@@ -1,0 +1,19 @@
+@import './base.css';
+
+#app {
+  display: block;
+  max-width: 1480px;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Federo Regular';
+  src: url('/src/assets/fonts/Federo-Regular.ttf');
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
