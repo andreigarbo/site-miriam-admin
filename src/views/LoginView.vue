@@ -1,15 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+function login() {
+  const username = document.querySelector('#username-field');
+  const password = document.querySelector('#password-field');
+
+  if (!username || !password) {
+    return;
+  }
+}
+</script>
 
 <template>
   <div id="login-view-container">
     <form>
       <label for="username">Username</label>
-      <input type="text" placeholder="username" name="username" required />
+      <input id="username-field" type="text" placeholder="username" name="username" required />
 
       <label for="password">Password</label>
-      <input type="password" placeholder="password" name="password" required />
+      <input id="password-field" type="password" placeholder="password" name="password" required />
 
-      <button type="submit">Login</button>
+      <button type="submit" @click="login()">Login</button>
     </form>
   </div>
 </template>
