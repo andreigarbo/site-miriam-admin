@@ -1,3 +1,6 @@
+import process from 'node:process';
+import { Request } from '../requests/request';
+
 class HttpService {
   static #instance: HttpService;
 
@@ -7,5 +10,9 @@ class HttpService {
     }
 
     return HttpService.#instance;
+  }
+
+  public dispatch(request: Request) {
+    const serverUrl = process.env.SERVER_URL;
   }
 }
