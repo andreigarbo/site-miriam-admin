@@ -1,18 +1,22 @@
-import process from 'node:process';
 import { Request } from '../requests/request';
 
 class HttpService {
   static #instance: HttpService;
+  serverUrl!: string;
 
   constructor() {
     if (!HttpService.#instance) {
+      this.serverUrl = import.meta.env.SERVER_URL;
+
+      if (!this.serverUrl) {
+        throw new Error('');
+      }
+
       HttpService.#instance = this;
     }
 
     return HttpService.#instance;
   }
 
-  public dispatch(request: Request) {
-    const serverUrl = process.env.SERVER_URL;
-  }
+  // public dispatch(request: Request): Response {}
 }
