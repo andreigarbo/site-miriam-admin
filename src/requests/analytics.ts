@@ -1,3 +1,4 @@
+import { getJwt } from '@/services/JWTService';
 import { HTTP_METHOD, Request } from './request';
 
 class GetAllAnalyticsRequest extends Request {
@@ -5,7 +6,10 @@ class GetAllAnalyticsRequest extends Request {
     const method = HTTP_METHOD.GET;
     const module = 'analytics';
     const endpoint = 'get-analytics-data';
-    super(method, module, endpoint);
+    const headers = {
+      Authorization: 'Bearer ' + getJwt(),
+    };
+    super(method, module, endpoint, undefined, headers);
   }
 }
 

@@ -1,4 +1,5 @@
 import { HTTP_METHOD, Request } from './request';
+import { getJwt } from '@/services/JWTService';
 
 class LoginRequest extends Request {
   constructor(username: string, password: string) {
@@ -9,7 +10,7 @@ class LoginRequest extends Request {
       username,
       password,
     };
-    super(method, module, endpoint, params);
+    super(method, module, endpoint, params, undefined);
   }
 }
 
@@ -19,9 +20,12 @@ class VerifyTwoFactorRequest extends Request {
     const module = 'auth';
     const endpoint = '2fa';
     const params = {
-      code,
+      twofacode: code,
     };
-    super(method, module, endpoint, params);
+    const headers = {
+      Authorization: 'Bearer ' + getJwt(),
+    };
+    super(method, module, endpoint, params, headers);
   }
 }
 
@@ -30,7 +34,10 @@ class RefreshTokenRequest extends Request {
     const method = HTTP_METHOD.POST;
     const module = 'auth';
     const endpoint = 'refresh-token';
-    super(method, module, endpoint);
+    const headers = {
+      Authorization: 'Bearer ' + getJwt(),
+    };
+    super(method, module, endpoint, undefined, headers);
   }
 }
 
