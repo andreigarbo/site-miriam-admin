@@ -17,7 +17,6 @@ async function fetchData() {
     console.error('No data on server response');
     return;
   }
-  console.log(response.data[0]);
 }
 
 onMounted(fetchData);
