@@ -40,9 +40,9 @@ async function verify2FaCode() {
       router.push('/login');
     }
 
-    if (response.message == 'Expired 2FA Token') {
+    if (response.message == 'Invalid 2FA Token') {
       twoFACodeField.value = '';
-      setError('Expired token');
+      setError('Invalid token');
       return;
     }
   }

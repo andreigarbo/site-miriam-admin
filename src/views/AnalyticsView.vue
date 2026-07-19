@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import AnalyticsTable from '@/components/AnalyticsTable.vue';
 import { GetAllAnalyticsRequest } from '@/requests/analytics';
 import router from '@/router';
-import { onMounted, ref } from 'vue';
+import { isAnalyticsDataEntry } from '@/utils/typeGuards';
+import { onBeforeMount, onMounted, ref } from 'vue';
 
-const analyticsData = ref('');
+const analyticsData = ref();
 
 async function fetchData() {
   const request = new GetAllAnalyticsRequest();
@@ -24,13 +26,37 @@ async function fetchData() {
     router.push('/login');
     return;
   }
+
+  const analyticsDiv = document.querySelector('#analytics-div');
+
+  if (!analyticsDiv || analyticsDiv == null) {
+    return;
+  }
+
+  analyticsData.value = [];
+  for (const obj of response.data) {
+    if (isAnalyticsDataEntry(obj)) {
+      analyticsData.value.push(obj);
+    } else {
+      console.log(obj);
+    }
+  }
 }
 
-onMounted(fetchData);
+// onMounted(fetchData);
+onBeforeMount(fetchData);
 </script>
 
 <template>
-  <div></div>
+  <div id="analytics-div">
+    <AnalyticsTable id="analytics-table" :data="analyticsData"></AnalyticsTable>
+  </div>
 </template>
 
-<style></style>
+<style>
+#analytics-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
